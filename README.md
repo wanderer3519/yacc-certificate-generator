@@ -24,4 +24,7 @@ Similarly for the other ones.
 
 Step 3: Open the repo in VS Code (or your favourite IDE), navigate to your folder and start working
 
+
+IMPORTANT: NEVER USE THE MASTER BRANCH FOR YOUR OWN PURPOSES
+
 Happy coding!
