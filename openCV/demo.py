@@ -31,20 +31,15 @@ clone = image.copy()
 cv2.namedWindow("image")
 # setting the mouse callback function
 names=['AA_BB_CC_DD_EE1', 'AA_BB_CC_DD_EE2', 'AA_BB_CC_DD_EE3', 'AA_BB_CC_DD_EE4', 'AA_BB_CC_DD_EE5']
-cv2.setMouseCallback("image", shape_selection)
   
-# keep looping until the 'q' key is pressed
 while True:
-    # display the image and wait for a keypress
     cv2.imshow("image", image)
+    cv2.setMouseCallback("image", shape_selection)
+    # display the image and wait for a keypress
     key = cv2.waitKey(1) & 0xFF
   
-    # press 'r' to reset window 
-    if key == ord("r"):
-        image = clone.copy()
-  
-    # if the 'c' key is pressed, break from the loop
-    elif key == ord("c"):
+    # if the 'c' key is pressed
+    if key == ord("c"):
         # font 
         font = cv2.FONT_HERSHEY_SIMPLEX 
         
@@ -63,12 +58,10 @@ while True:
         # Using cv2.putText() method 
         image = cv2.putText(image, 'OpenCV', org, font,  
                         fontScale, color, thickness, cv2.LINE_AA) 
-        break
-
-if len(point) == 2:
-    crop_img = clone[point[0][1]:point[1][1], point[0][0]:point[1][0]]
-    cv2.imshow("Text entered", image)
-    cv2.waitKey(0)
-
-    # close all open windows
-cv2.destroyAllWindows()
+        cv2.imshow("Text entered", image)
+        cv2.waitKey(0)
+            
+        # close all open windows
+        cv2.destroyAllWindows()
+        image=clone.copy()
+        continue
