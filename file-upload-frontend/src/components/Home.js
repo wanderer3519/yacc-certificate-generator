@@ -14,7 +14,13 @@ export function Home(){
                 {/* In react, element binding is done using this also known for comments*/}
                 <div class="card m-2" style={style}>
                     <div class="card-header text-center">
-                        <strong> Upload Certificate to page</strong>
+                        {
+                            (!isUploaded) ? (
+                            <strong> Upload Certificate to page</strong>
+                        ) : (
+                            <strong> Image uploaded successfully </strong>
+                        )
+                        }
                     </div>
 
                     <div class="card-body">
