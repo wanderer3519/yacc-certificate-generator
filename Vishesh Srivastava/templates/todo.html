@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.todo-form {
+  margin-bottom: 20px;
+}
+
+/* Customize button styles */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Add more specific styles for different sections */
+/* Example: */
+.incomplete-tasks {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.completed-tasks {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+    </style>
+</head>
+<body>
+  <div >
+    <h1 >To-Do List</h1>
+    <h3 >Incomplete Tasks</h3>
+    <ul >
+      {% for task in tasks %}
+      <li >
+        <h2 >{{ task[2] }}</h2>  <h3>{{ task[0] }} </h3><br>  <div>  <a href="/todo/complete_task/{{ loop.index0 }}">Complete</a>
+          <a  href="/todo/delete_task/{{ loop.index0 }}">Delete</a>
+        </div>   {{ task[1] }}
+        <form method="POST" action="/todo/update_task/{{ loop.index0 }}">
+          <input type="hidden" name="task_index" value="{{ loop.index0 }}">
+          <input type="text" name="newheading" placeholder="Update heading">
+          <input type="text" name="newcontent" placeholder="Update content">
+          <button type="submit">Update Task</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    
+    <form action="/todo/add_task" method="post" class="todo-form">
+      <input type="text" name="heading" placeholder="Enter Task heading">
+      <input type="text" name="content" placeholder="Enter task">
+      <button type="submit">Add Task</button>
+    </form>
+    <h3>Completed Tasks</h3>
+    <ul>
+      {% for i in completed[::-1][:10] %}
+      <li> <h3>{{ i[2]}} </h3>{{ i[0] }} (Completed) {{i[1]}}</li>
+      {% endfor %}
+    </ul>
+    <div>
+      
+      <div>
+        <div>
+          <button>All Tasks</button>
+          <ul>
+            {% for i in tasks %}
+            <<li> <h3>{{ i[2]}} </h3>{{ i[0] }} {{i[1]}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div>
+          <button>All Completed Tasks</button>
+          <ul>
+            {% for i in completed %}
+            <li> <h3>{{ i[2]}} </h3>{{ i[0] }}  {{i[1]}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  </html>
+  
