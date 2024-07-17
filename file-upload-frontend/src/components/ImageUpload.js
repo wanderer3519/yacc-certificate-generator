@@ -10,7 +10,7 @@ function ImageUpload() {
 	function handleChange(e) {
 		console.log(e.target.files);
 		setFile(URL.createObjectURL(e.target.files[0]));
-        isUploaded = true;
+        isUploaded = !isUploaded;
 	}
 
 	return (
