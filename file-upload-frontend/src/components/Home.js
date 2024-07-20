@@ -1,10 +1,14 @@
 import ImageUpload from "./ImageUpload";
-import isUploaded from "./ImageUpload"
+// import isUploaded from "./ImageUpload"
+import handleCanvasClick from "./DrawRectangle";
+
+let isUploaded = false;
 
 // Lets you use style more compactly
 let style = {
     "min-height": "650px"
 }
+
 
 export function Home(){
     return (
@@ -25,6 +29,12 @@ export function Home(){
 
                     <div class="card-body">
                         <ImageUpload/>
+
+                        {
+                            (canvas) ? (
+                            <handleCanvasClick/>
+                            ) : (<p></p>)
+                        }
                     </div>
 
                 </div>
