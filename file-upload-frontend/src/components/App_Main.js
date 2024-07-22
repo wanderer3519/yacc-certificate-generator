@@ -4,8 +4,10 @@ import './App.css';
 function App() {
   const [image, setImage] = useState(null);
   const [clickCount, setClickCount] = useState(0);
+  
   const [startX, setStartX] = useState(0);
   const [startY, setStartY] = useState(0);
+  
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
   const imageRef = useRef(new Image());
@@ -35,6 +37,8 @@ function App() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
+    console.log(x, y);
+
     if (clickCount === 0) {
       setStartX(x);
       setStartY(y);
@@ -56,9 +60,13 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="m-2 align-items-center">
+    
       <input type="file" accept="image/*" onChange={handleImageUpload} />
-      <canvas ref={canvasRef} onClick={handleCanvasClick} />
+    
+      <div className='m-2'>
+        <canvas ref={canvasRef} onClick={handleCanvasClick} />
+      </div>
     </div>
   );
 }

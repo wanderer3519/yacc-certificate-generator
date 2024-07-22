@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 // import './index.css';
 
 // App component
-import App from './App';
+import App from './components/App_Main';
 
 // Font awesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
