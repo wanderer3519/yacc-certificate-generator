@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Certificate Generator</h1>
+        <form id="certificateForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course" required>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <button type="submit">Generate Certificate</button>
+        </form>
+        
+        <div id="certificate" class="certificate" style="display: none;">
+            <h2>Certificate of Completion</h2>
+            <p>This is to certify that</p>
+            <h3 id="certName"></h3>
+            <p>has successfully completed the course</p>
+            <h3 id="certCourse"></h3>
+            <p>on</p>
+            <h3 id="certDate"></h3>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
