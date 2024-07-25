@@ -1,0 +1,3 @@
+startX: 225, startY: 260, endX: 640, endY: 341
+startX: 366, startY: 548, endX: 496, endY: 575
+startX: 377, startY: 582, endX: 479, endY: 595

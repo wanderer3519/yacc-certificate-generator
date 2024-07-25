@@ -44,6 +44,8 @@ function handleCanvasClick(e) {
         clickCount = 0; 
     }
 }
+
+// Request data sent to backend
 function sendVar(startX, startY, endX, endY) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/storeinfile", true);
