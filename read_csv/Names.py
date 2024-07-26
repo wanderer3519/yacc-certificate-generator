@@ -1,6 +1,6 @@
 import pandas as pd
 
-# file_name = './read_csv/Data-for-Certificate.xlsx'
+file_name = './Data-for-Certificate.xlsx'
 
 def Names(file_name):
     # Read the Excel file
@@ -12,3 +12,5 @@ def Names(file_name):
     names = [d[cols[1]][i] for i in d[cols[1]]]
     # print(names)
     return names
+
+print(Names(file_name))
