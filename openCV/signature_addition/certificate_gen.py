@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 
 # Paths to the certificate and signature images
-certificate_path = 'certificate.jpeg'
-signature_path1 = 'img.png'
-signature_path2 = 'img1.png'
+certificate_path = '../../Assets/Certificate.jpeg'
+signature_path1 = '../../Assets/img.png'
+signature_path2 = '../../Assets/img1.png'
 
 # Read the base image
 base_image = cv2.imread(certificate_path)
