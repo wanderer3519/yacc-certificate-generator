@@ -17,3 +17,5 @@ def StoringInFile():
         data = f"startX: {startX}, startY: {startY}, endX: {endX}, endY: {endY}\n"
         fh.write(data)
     return redirect('rectangle.html') 
+# call openCV
+# main(true, true, data, coords)
