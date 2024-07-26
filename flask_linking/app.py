@@ -14,8 +14,19 @@ def StoringInFile():
         startY = str(data['startY'])
         endX = str(data['endX'])
         endY = str(data['endY'])
+        imagepath = '../'
         data = f"startX: {startX}, startY: {startY}, endX: {endX}, endY: {endY}\n"
         fh.write(data)
     return redirect('rectangle.html') 
 # call openCV
 # main(true, true, data, coords)
+
+def processImage():
+    pass
+    NAMES = ['1', '2']
+    is_sign_added = True
+    is_watermark_added = False
+
+    '''
+        Calls the main in openCV
+    '''
