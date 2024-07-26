@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Read the certificate and logo images
-certificate = cv2.imread('/home/anusha/Downloads/certificate.jpeg')
+certificate = cv2.imread('../Certificate.jpeg')
 logo = cv2.imread('/home/anusha/Downloads/o.png', cv2.IMREAD_UNCHANGED)
 
 # Get the color of the top rightmost pixel of the logo

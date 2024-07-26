@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Load the certificate image
-certificate = cv2.imread('/home/anusha/Downloads/certificate.jpeg')
+certificate = cv2.imread('../Certificate.jpeg')
 
 # Read the watermark text from a file
 with open('/home/anusha/Downloads/watermark.txt', 'r') as file:
