@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_name = './Data-for-Certificate.xlsx'
+file_name = '../Assets/Data-for-Certificate.xlsx'
 
 def Names(file_name):
     # Read the Excel file
@@ -13,4 +13,4 @@ def Names(file_name):
     # print(names)
     return names
 
-print(Names(file_name))
+# print(Names(file_name))
