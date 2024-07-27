@@ -1,6 +1,6 @@
 
 from openCV_text_addition.certificate_openCv import add_name
-import openCV as cv2
+import cv2
 import numpy as np
 from signature_addition.certificate_gen import add_signature
 
@@ -10,7 +10,7 @@ image = cv2.imread(r'mini projects\certificate_gen\certificate.jpg')
 def main(is_sign_added, is_watermark_added, names , startX, startY, endX, endY):
 
     for name in names:
-        if not is_sign_added:   # To do: Once the input for coordiates is available, we will use them as x_offset and y_offset.
+        if not is_sign_added:   # startX and startY: x_offset, y_offset of first signature image. endX, endY: x_offset and y_offset of second image.
             certificate_path = '../Assets/certificate.jpeg'
             signature_path1 = '../Assets/img.png'
             signature_path2 = '../Assets/img1.png'
@@ -34,13 +34,10 @@ def main(is_sign_added, is_watermark_added, names , startX, startY, endX, endY):
                 exit()
                 
             # Call add_signature to add the first signature to the base image.
-            base_image = add_signature(base_image = base_image, signature_image = signature_image1, x_offset = 150, y_offset = 602, scale_w = 0.3, scale_h = 0.1)
-            
-            # Calculate y_offset for the second signature
-            y_offset_second_signature = base_image.shape[0] - int(base_image.shape[0] * 0.1) - 210
+            base_image = add_signature(base_image = base_image, signature_image = signature_image1, x_offset = startX, y_offset = startY, scale_w = 0.3, scale_h = 0.1)
 
             # Call add_signature to add the second signature to the base image 
-            base_image = add_signature(base_image = base_image, signature_image = signature_image2, x_offset = 720, y_offset = y_offset_second_signature, scale_w = 0.3,scale_h = 0.1)
+            base_image = add_signature(base_image = base_image, signature_image = signature_image2, x_offset = endX, y_offset = endY, scale_w = 0.3,scale_h = 0.1)
 
             # Save or display the final image
             cv2.imwrite('final_image_with_two_signatures.jpg', base_image)
