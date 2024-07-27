@@ -52,6 +52,9 @@ def main(is_sign_added, is_watermark_added, names , startX, startY, endX, endY):
     
         else:
             add_name(image,name,startX,startY,endX,endY)
+            
+# Testing for signature addition            
+main(0, 1, [], 150, 602, 720, 604)
 
             
         
