@@ -33,7 +33,7 @@ def processImage():
     '''
     NAMES = ['1', '2']
     is_sign_added = True
-    is_watermark_added = False
+    is_watermark_added = True
     finimg = processfn.main(is_sign_added, is_watermark_added, NAMES, startX, startY, endX, endY)
     return redirect('/')
 

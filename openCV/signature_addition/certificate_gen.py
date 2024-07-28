@@ -88,7 +88,7 @@ base_image = add_signature(
 )
 
 # Save or display the final image
-cv2.imwrite('final_image_with_two_signatures.jpg', base_image)
+""" cv2.imwrite('final_image_with_two_signatures.jpg', base_image)
 cv2.imshow('Final Image with Two Signatures', base_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.destroyAllWindows() """
