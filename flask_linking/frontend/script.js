@@ -47,9 +47,15 @@ function handleCanvasClick(e) {
 
 // Request data sent to backend
 function sendVar(startX, startY, endX, endY) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", "/storeinfile", true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    var data = JSON.stringify({ startX: startX, startY: startY, endX: endX, endY: endY });
+    let data = JSON.stringify({ 
+        startX: startX, 
+        startY: startY, 
+        endX: endX, 
+        endY: endY,
+        image: image
+    });
     xhr.send(data);
 }

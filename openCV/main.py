@@ -1,10 +1,10 @@
-from openCV_text_addition.certificate_openCv import add_name
+from openCV.openCV_text_addition.certificate_openCv import add_name
 import cv2
 import numpy as np
-from signature_addition.certificate_gen import add_signature
+from openCV.signature_addition.certificate_gen import add_signature
 
 # main template
-image_path = r'../Assets/Certificate.jpeg'
+image_path = '../Assets/Certificate.jpeg'
 signature_path1 = '../Assets/img.png'
 signature_path2 = '../Assets/img1.png'
 
@@ -27,13 +27,13 @@ if signature_image2 is None:
     exit()
 
 
-def main(is_sign_added, is_watermark_added, names , startX, startY, endX, endY):
+def main(image_path, is_sign_added, is_watermark_added, names , startX, startY, endX, endY):
 
     for name in names:
         if not is_sign_added:          
                 
             # Call add_signature to add the first signature to the base image.
-            base_image = add_signature(base_image = image, signature_image = signature_image1, x_offset = startX, y_offset = startY, scale_w = 0.3, scale_h = 0.1)
+            base_image = add_signature(base_image = image_path, signature_image = signature_image1, x_offset = startX, y_offset = startY, scale_w = 0.3, scale_h = 0.1)
 
             # Call add_signature to add the second signature to the base image 
             base_image = add_signature(base_image = base_image, signature_image = signature_image2, x_offset = endX, y_offset = endY, scale_w = 0.3,scale_h = 0.1)
@@ -43,13 +43,13 @@ def main(is_sign_added, is_watermark_added, names , startX, startY, endX, endY):
             #do sth
     
         else:
-            add_name(image, name, startX, startY, endX, endY)
+            add_name(image_path, name, startX, startY, endX, endY)
             
             
 
 # Testing for signature addition 
 if __name__ == '__main__':           
-    main(True, True, ['121'], 150, 602, 720, 604)
+    main(image, True, True, ['121'], 150, 602, 720, 604)
 
 """ 
     cv2.imwrite('final_image_with_two_signatures.jpg', base_image)
@@ -58,8 +58,8 @@ if __name__ == '__main__':
     cv2.destroyAllWindows() 
 """
 
-cv2.imshow('Test', image)
-cv2.waitKey(6000) # time in ms
+# cv2.imshow('Test', image)
+# cv2.waitKey(6000) # time in ms
 # exit()
 # cv2.destroyAllWindows()
         

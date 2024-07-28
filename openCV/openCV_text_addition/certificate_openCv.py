@@ -13,8 +13,8 @@ def add_name(image,name,startX,startY,endX,endY):
     # Add the baseline to the height to get the total height
     total_height = text_height + baseline
 
-    print(f"Text width: {text_width}")
-    print(f"Text height: {total_height}")
+    # print(f"Text width: {text_width}")
+    # print(f"Text height: {total_height}")
 
     name_loc_width = (startX + endX)//2 - (text_width//2)
 
