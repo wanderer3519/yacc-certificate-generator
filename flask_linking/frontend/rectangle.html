@@ -8,10 +8,13 @@
 <body>
     <div style="display: block">
     <p>Please select your file</p>
-    <input type="file" id="imageLoader" name="imageLoader"/>
+    <form method="POST" action="/storefile" enctype="multipart/form-data">
+    <input type="file" id="imageLoader" name="imageLoader">
+    <input type="submit" value="Upload">
+    </form>
     </div>
     <canvas id="myCanvas" width="500" height="500"></canvas>
-    <button type="button" onclick="sendVar(10, 20, 30, 40)">Upload Image with Coordinates</button>
+    <!-- <button type="button" onclick="sendVar(10, 20, 30, 40)">Upload Image with Coordinates</button> -->
 
     <script>
         const canvas = document.getElementById('myCanvas');
@@ -67,34 +70,60 @@
             reader.onload = () => callback(reader.result);
             reader.onerror = error => console.log('Error: ', error);
         }
-
-        function sendVar(startX, startY, endX, endY) {
+        // const base64Image = canvas.toDataURL('image/png');
+        async function sendVar(startX, startY, endX, endY) {
+            const data = {
+            startX: startX,
+            startY: startY,
+            endX: endX,
+            endY: endY,
+            // image: base64Image
+            };
             /* var xhr = new XMLHttpRequest();
             xhr.open("POST", "/storeinfile", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             var data = JSON.stringify({ startX: startX, startY: startY, endX: endX, endY: endY , image: image});
             xhr.send(data); */
-            const fileInput = document.getElementById('myCanvas');
-            console.log(fileInput)
-            const file = fileInput.files[0];
+            // const fileInput = document.getElementById('myCanvas');
+            // console.log(fileInput)
+            // const file = fileInput.files[0];
 
-            if (file) {
-                getBase64(file, function(base64Image) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/storeinfile", true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    var data = JSON.stringify({ 
-                        startX: startX, 
-                        startY: startY, 
-                        endX: endX, 
-                        endY: endY, 
-                        image: base64Image 
-                    });
-                    xhr.send(data);
-                });
-            } else {
-                alert('Please select an image to upload.');
-            }
+            // if (file) {
+            //     getBase64(file, function(base64Image) {
+            //         var xhr = new XMLHttpRequest();
+            //         xhr.open("POST", "/storeinfile", true);
+            //         xhr.setRequestHeader("Content-Type", "application/json");
+            //         var data = JSON.stringify({ 
+            //             startX: startX, 
+            //             startY: startY, 
+            //             endX: endX, 
+            //             endY: endY, 
+            //             image: base64Image 
+            //         });
+            //         xhr.send(data);
+            //     });
+            // } else {
+            //     alert('Please select an image to upload.');
+            // }
+    //         try {
+    const response = await fetch('/storeinfile', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    // if (!response.ok) {
+    //     throw new Error('Network response was not ok');   
+
+    // }
+
+//     const responseData = await response.json();
+//     console.log( responseData);
+// } catch (error) {
+//     console.error( error);
+// }
         }
     </script>
 </body>

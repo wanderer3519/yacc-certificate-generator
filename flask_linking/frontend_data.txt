@@ -1,6 +1,2 @@
-startX: 225, startY: 260, endX: 640, endY: 341
-startX: 366, startY: 548, endX: 496, endY: 575
-startX: 377, startY: 582, endX: 479, endY: 595
-startX: 327, startY: 337, endX: 951, endY: 430
-startX: 336, startY: 327, endX: 948, endY: 429
-startX: 328, startY: 349, endX: 953,endY: 426 image: {}
+startX: 281, startY: 44, endX: 948, endY: 471 imagePath: uploads\image0.jpeg
+startX: 270, startY: 136, endX: 723, endY: 380 imagePath: uploads\image1.jpeg
