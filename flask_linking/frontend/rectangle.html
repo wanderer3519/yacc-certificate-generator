@@ -2,11 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate genarator</title>
+    <title>Certificate generator</title>
     <style src="index.css"></style>
 </head>
 <body>
     <div style="display: block">
+<<<<<<< HEAD
     <p>Please select your file</p>
     <form method="POST" action="/storefile" enctype="multipart/form-data">
     <input type="file" id="imageLoader" name="imageLoader">
@@ -15,6 +16,14 @@
     </div>
     <canvas id="myCanvas" width="500" height="500"></canvas>
     <!-- <button type="button" onclick="sendVar(10, 20, 30, 40)">Upload Image with Coordinates</button> -->
+=======
+        <p>Please select your file</p>
+        <input type="file" id="imageLoader" name="imageLoader"/>
+    </div>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <button type="button" onclick="sendVar(10, 20, 30, 40)">Upload Image with Coordinates</button>
+    <button type="button" onclick="submitForm()">Submit</button>
+>>>>>>> 709352a37d270bc1443fcceca6db222cd20db156
 
     <script>
         const canvas = document.getElementById('myCanvas');
@@ -70,6 +79,7 @@
             reader.onload = () => callback(reader.result);
             reader.onerror = error => console.log('Error: ', error);
         }
+<<<<<<< HEAD
         // const base64Image = canvas.toDataURL('image/png');
         async function sendVar(startX, startY, endX, endY) {
             const data = {
@@ -87,6 +97,12 @@
             // const fileInput = document.getElementById('myCanvas');
             // console.log(fileInput)
             // const file = fileInput.files[0];
+=======
+
+        function sendVar(startX, startY, endX, endY) {
+            const fileInput = document.getElementById('imageLoader');
+            const file = fileInput.files[0];
+>>>>>>> 709352a37d270bc1443fcceca6db222cd20db156
 
             // if (file) {
             //     getBase64(file, function(base64Image) {
@@ -124,6 +140,10 @@
 // } catch (error) {
 //     console.error( error);
 // }
+        }
+
+        function submitForm() {
+            alert("Form Submitted");
         }
     </script>
 </body>
