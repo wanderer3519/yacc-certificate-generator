@@ -11,7 +11,8 @@ image = '../Assets/Certificate.jpeg'
 app = Flask(__name__, template_folder="frontend")
 i = 0
 
-startX=startY=endX=endY=""
+startX = startY = endX = endY = ""
+
 @app.route("/")
 def home():
     return render_template('rectangle.html')
@@ -19,10 +20,12 @@ def home():
 @app.route("/storefile", methods=['POST'])
 def storefile():
     global i
+    
     file = request.files['imageLoader']
     image_filename = f"image{i}.jpeg"
     image_dir = "uploads"  
     os.makedirs(image_dir, exist_ok=True)  
+    
     image_path = os.path.join(image_dir, image_filename)  
     i += 1
     file.save(image_path)
@@ -56,9 +59,20 @@ def processImage():
     NAMES = Names(data_path)
     is_sign_added = True
     is_watermark_added = True
-    image_path = "path/to/your/image.png"  
+    image_path = "uploads/image0.jpeg"  
     finimg = processfn.main(image_path, is_sign_added, is_watermark_added, NAMES, startX, startY, endX, endY)
-    return redirect('/')
+    
+    # file = request.files['imageLoader']
+    image_filename = f'image{i}.jpeg'
+    image_dir = "uploads"  
+    os.makedirs(image_dir, exist_ok=True)  
+    
+    image_path = os.path.join(image_dir, image_filename)  
+    i += 1
+    finimg.save(image_path)
+
+
+    return redirect('/storefile')
  
 
 

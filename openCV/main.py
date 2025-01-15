@@ -42,14 +42,14 @@ def main(image_path, is_sign_added, is_watermark_added, names , startX, startY, 
             pass
             #do sth
     
-        else:
-            add_name(image_path, name, startX, startY, endX, endY)
+        
+        add_name(image_path, name, startX, startY, endX, endY)
             
             
 
 # Testing for signature addition 
 if __name__ == '__main__':           
-    main(image, True, True, ['121'], 150, 602, 720, 604)
+    main(image, False, True, ['Sri Krishna'], 150, 602, 720, 604)
 
 """ 
     cv2.imwrite('final_image_with_two_signatures.jpg', base_image)
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 """
 
 # cv2.imshow('Test', image)
-# cv2.waitKey(6000) # time in ms
+# cv2.waitKey(600000) # time in ms
 # exit()
 # cv2.destroyAllWindows()
         

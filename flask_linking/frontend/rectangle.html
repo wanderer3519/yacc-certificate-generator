@@ -7,12 +7,15 @@
 </head>
 <body>
     <div style="display: block">
-    <p>Please select your file</p>
-    <form method="POST" action="/storefile" enctype="multipart/form-data">
-    <input type="file" id="imageLoader" name="imageLoader">
-    <input type="submit" value="Upload">
-    </form>
+        <p>Please select your file</p>
+        
+        <form method="POST" action="/storefile" enctype="multipart/form-data">
+            <input type="file" id="imageLoader" name="imageLoader">
+            <input type="submit" value="Upload">
+        </form>
+    
     </div>
+    
     <canvas id="myCanvas" width="500" height="500"></canvas>
 
     <script>
@@ -77,17 +80,24 @@
             endX: endX,
             endY: endY,
             };
-    const response = await fetch('/storeinfile', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
+        
+        const response = await fetch('/storeinfile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
         }
 
         function submitForm() {
             alert("Form Submitted");
+        }
+
+        // should send the request of uploaded file to backend
+        // add another button to shoe final results
+        function sendRequest(){
+
         }
     </script>
 </body>
