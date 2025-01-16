@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-# Paths to the certificate and signature images
+""" # Paths to the certificate and signature images
 certificate_path = '../Assets/Certificate.jpeg'
 signature_path1 = '../Assets/img.png'
 signature_path2 = '../Assets/img1.png'
@@ -23,7 +23,7 @@ signature_image2 = cv2.imread(signature_path2, cv2.IMREAD_UNCHANGED)
 if signature_image2 is None:
     print(f"Error: Unable to load image from path: {signature_path2}")
     exit()
-
+ """
 # Function to add a signature to the base image
 def add_signature(base_image, signature_image, x_offset, y_offset, scale_w, scale_h):
     # Check if the signature image has an alpha channel
@@ -65,27 +65,27 @@ def add_signature(base_image, signature_image, x_offset, y_offset, scale_w, scal
     return base_image
 
 # Add the first signature to the base image
-base_image = add_signature(
+""" base_image = add_signature(
     base_image=base_image,
     signature_image=signature_image1,
     x_offset=150,
     y_offset=602,
     scale_w=0.3,
     scale_h=0.1
-)
+) """
 
 # Calculate y_offset for the second signature
-y_offset_second_signature = base_image.shape[0] - int(base_image.shape[0] * 0.1) - 210
+# y_offset_second_signature = base_image.shape[0] - int(base_image.shape[0] * 0.1) - 210
 
 # Add the second signature to the base image (example position: bottom left corner)
-base_image = add_signature(
+""" base_image = add_signature(
     base_image=base_image,
     signature_image=signature_image2,
     x_offset=720,
     y_offset=y_offset_second_signature,
     scale_w=0.3,
     scale_h=0.1
-)
+) """
 
 # Save or display the final image
 """ cv2.imwrite('final_image_with_two_signatures.jpg', base_image)

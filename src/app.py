@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, redirect
 import sys
 import os  
 
-sys.path.append('..')  
-import openCV.main as processfn
+import src.main as processfn
 from read_csv.Names import Names
 
 data_path = '../Assets/Data-for-Certificate.xlsx'
