@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_name = '../Assets/Data-for-Certificate.xlsx'
+file_name = '../../Assets/Data-for-Certificate.xlsx'
 
 def Names(file_name):
     # Read the Excel file
@@ -14,3 +14,8 @@ def Names(file_name):
     return names
 
 # print(Names(file_name))
+
+df = pd.read_excel(file_name)
+print(df)
+
+df.to_csv('../../Assets/Data.csv', index = False)
