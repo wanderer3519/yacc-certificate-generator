@@ -20,3 +20,4 @@ def add_name(image,name,startX,startY,endX,endY):
 
     text = cv2.putText(image,name,(name_loc_width,name_loc_height),font,font_scale,(0,0,255),thickness,cv2.LINE_AA)
 
+    print(f"Adding name: {name} at position: {(name_loc_width, name_loc_height)}")
