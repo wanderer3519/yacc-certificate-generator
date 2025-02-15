@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #myCanvas {
+            border: 2px solid #ccc;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: teal;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #005f5f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coordinate Selection</h1>
+    <p>Click twice on the canvas to define the name area.</p>
+    <canvas id="myCanvas"></canvas>
+    <button id="saveCoordinates">Save Coordinates</button>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        const saveCoordinatesButton = document.getElementById('saveCoordinates');
+        let clickCount = 0;
+        let startX, startY, endX, endY;
+
+        // Load the image
+        const image = new Image();
+        image.src = "{{ url_for('static', filename=image_path.split('uploads/')[-1]) }}"; // Load the uploaded image
+        image.onload = function () {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
+        };
+
+        // Capture clicks on the canvas
+        canvas.addEventListener('click', function (e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            if (clickCount === 0) {
+                startX = x;
+                startY = y;
+                clickCount++;
+            } else {
+                endX = x;
+                endY = y;
+                drawRectangle();
+                clickCount = 0;
+            }
+        });
+
+        function drawRectangle() {
+            const width = endX - startX;
+            const height = endY - startY;
+
+            ctx.drawImage(image, 0, 0); // Redraw the image
+            ctx.beginPath();
+            ctx.rect(startX, startY, width, height);
+            ctx.strokeStyle = 'teal';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        // Save coordinates to the server
+        saveCoordinatesButton.addEventListener('click', async function () {
+            const data = { startX, startY, endX, endY };
+            try {
+                const response = await fetch('/storeinfile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message);
+                    window.location.href = '/'; // Redirect to home page
+                } else {
+                    alert('Failed to save coordinates.');
+                }
+            } catch (error) {
+                console.error('Error saving coordinates:', error);
+            }
+        });
+    </script>
+</body>
+</html>

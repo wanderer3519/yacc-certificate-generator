@@ -102,8 +102,8 @@
     </script>
 </body>
 </html> -->
-
-<!-- <!DOCTYPE html>
+<!-- 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -269,7 +269,7 @@
 </body>
 </html> -->
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -287,5 +287,172 @@
         
         <button type="submit">Upload and Add Names</button>
     </form>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        #myCanvas {
+            border: 2px solid #ccc;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button, input[type="submit"] {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: teal;
+            color: white;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #005f5f;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Certificate Generator</h1>
+    <p>Please upload your certificate template and draw a rectangle to specify the name area.</p>
+    
+    <!-- File Upload Form -->
+    <form method="POST" action="/storefile" enctype="multipart/form-data" onsubmit="submitForm()">
+        <input type="file" id="imageLoader" name="imageLoader" accept="image/*" required>
+        <input type="submit" value="Upload">
+    </form>
+    
+    <!-- Canvas for Image -->
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+
+    <!-- Buttons for Interaction -->
+    <div class="button-container">
+        <button id="resetCanvas" class="hidden">Reset Canvas</button>
+        <button id="processCertificates" class="hidden">Generate Certificates</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        const imageLoader = document.getElementById('imageLoader');
+        const resetCanvasButton = document.getElementById('resetCanvas');
+        const processCertificatesButton = document.getElementById('processCertificates');
+
+        let clickCount = 0;
+        let startX, startY, endX, endY;
+        let image = new Image();
+
+        // Load Image into Canvas
+        imageLoader.addEventListener('change', handleImage, false);
+        canvas.addEventListener('click', handleCanvasClick, false);
+        resetCanvasButton.addEventListener('click', resetCanvas);
+        processCertificatesButton.addEventListener('click', processCertificates);
+
+        function handleImage(e) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                image.onload = function () {
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    ctx.drawImage(image, 0, 0);
+                    resetCanvasButton.classList.remove('hidden');
+                };
+                image.src = event.target.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+        function handleCanvasClick(e) {
+            if (clickCount === 0) {
+                startX = e.offsetX;
+                startY = e.offsetY;
+                clickCount = 1;
+            } else {
+                endX = e.offsetX;
+                endY = e.offsetY;
+
+                const width = endX - startX;
+                const height = endY - startY;
+
+                ctx.drawImage(image, 0, 0); // Redraw the image
+                ctx.beginPath();
+                ctx.rect(startX, startY, width, height);
+                ctx.strokeStyle = 'teal';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                clickCount = 0;
+
+                // Send rectangle coordinates to the server
+                sendCoordinates(startX, startY, endX, endY);
+
+                // Show the process button
+                processCertificatesButton.classList.remove('hidden');
+            }
+        }
+
+        function resetCanvas() {
+            clickCount = 0;
+            ctx.drawImage(image, 0, 0); // Redraw the image
+            processCertificatesButton.classList.add('hidden');
+        }
+
+        async function sendCoordinates(startX, startY, endX, endY) {
+            const data = { startX, startY, endX, endY };
+            try {
+                const response = await fetch('/storeinfile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (response.ok) {
+                    alert('Coordinates saved successfully!');
+                } else {
+                    alert('Failed to save coordinates.');
+                }
+            } catch (error) {
+                console.error('Error sending coordinates:', error);
+            }
+        }
+
+        async function processCertificates() {
+            try {
+                const response = await fetch('/processimage', { method: 'GET' });
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Certificates generated successfully! Download: ' + data.processed_image);
+                    window.location.href = data.processed_image;
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error processing certificates:', error);
+            }
+        }
+
+        function submitForm() {
+            alert('File uploaded successfully. Now you can draw a rectangle.');
+        }
+    </script>
 </body>
 </html>
